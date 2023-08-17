@@ -15,8 +15,8 @@ on:
       - .github/workflows/ci-windows-latest.yaml
 
 jobs:
-   # TO-DO: Could simplify steps further, but probably in next iteration 
- # For now a quick approach 
+  # TO-DO: Could simplify steps further, but probably in next iteration
+  # For now a quick approach
   build-docker-ltsc2019:
     runs-on: windows-2019
     steps:
@@ -29,19 +29,39 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-       # Build and Push 3.11.2
+      # Build and Push 3.12.2 (latest)
+      - name: Build the Docker image 3.12.2
+        run: |
+          docker build . --file ./rabbitmq/windows/3.12.2/Dockerfile --tag micdenny/rabbitmq-windows:ltsc2019-latest --build-arg SERVER_VERSION=ltsc2019
+      - name: Publish to DockerHub 3.12.2
+        run: |
+          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.12.2-ltsc2019
+          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
+          docker push micdenny/rabbitmq-windows:ltsc2019-latest
+          docker push micdenny/rabbitmq-windows:3.12.2-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
+
+      # Build and Push 3.11.20
+      - name: Build the Docker image 3.11.20
+        run: |
+          docker build . --file ./rabbitmq/windows/3.11.20/Dockerfile --tag micdenny/rabbitmq-windows:3.11.20-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
+      - name: Publish to DockerHub 3.11.20
+        run: |
+          docker tag micdenny/rabbitmq-windows:3.11.20-ltsc2019 micdenny/rabbitmq-windows:3.11.20-servercore-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.11.20-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.11.20-servercore-ltsc2019
+
+      # Build and Push 3.11.2
       - name: Build the Docker image 3.11.2
         run: |
-          docker build . --file ./rabbitmq/windows/3.11.2/Dockerfile --tag micdenny/rabbitmq-windows:ltsc2019-latest --build-arg SERVER_VERSION=ltsc2019
+          docker build . --file ./rabbitmq/windows/3.11.2/Dockerfile --tag micdenny/rabbitmq-windows:3.11.2-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
       - name: Publish to DockerHub 3.11.2
         run: |
-          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.11.2-ltsc2019
-          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.11.2-servercore-ltsc2019
-          docker push micdenny/rabbitmq-windows:ltsc2019-latest
+          docker tag micdenny/rabbitmq-windows:3.11.2-ltsc2019 micdenny/rabbitmq-windows:3.11.2-servercore-ltsc2019
           docker push micdenny/rabbitmq-windows:3.11.2-ltsc2019
           docker push micdenny/rabbitmq-windows:3.11.2-servercore-ltsc2019
 
-       # Build and Push 3.11.0
+      # Build and Push 3.11.0
       - name: Build the Docker image 3.11.0
         run: |
           docker build . --file ./rabbitmq/windows/3.11.0/Dockerfile --tag micdenny/rabbitmq-windows:3.11.0-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
@@ -50,6 +70,16 @@ jobs:
           docker tag micdenny/rabbitmq-windows:3.11.0-ltsc2019 micdenny/rabbitmq-windows:3.11.0-servercore-ltsc2019
           docker push micdenny/rabbitmq-windows:3.11.0-ltsc2019
           docker push micdenny/rabbitmq-windows:3.11.0-servercore-ltsc2019
+
+      # Build and Push 3.10.25
+      - name: Build the Docker image 3.10.25
+        run: |
+          docker build . --file ./rabbitmq/windows/3.10.25/Dockerfile --tag micdenny/rabbitmq-windows:3.10.25-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
+      - name: Publish to DockerHub 3.10.25
+        run: |
+          docker tag micdenny/rabbitmq-windows:3.10.25-ltsc2019 micdenny/rabbitmq-windows:3.10.25-servercore-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.10.25-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.10.25-servercore-ltsc2019
           
       # Build and Push 3.10.7
       - name: Build the Docker image 3.10.7
@@ -70,7 +100,16 @@ jobs:
           docker tag micdenny/rabbitmq-windows:3.9.24-ltsc2019 micdenny/rabbitmq-windows:3.9.24-servercore-ltsc2019
           docker push micdenny/rabbitmq-windows:3.9.24-ltsc2019
           docker push micdenny/rabbitmq-windows:3.9.24-servercore-ltsc2019
-          
+      
+      # Build and Push 3.9.29
+      - name: Build the Docker image 3.9.29
+        run: |
+          docker build . --file ./rabbitmq/windows/3.9.29/Dockerfile --tag micdenny/rabbitmq-windows:3.9.29-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
+      - name: Publish to DockerHub 3.9.29
+        run: |
+          docker tag micdenny/rabbitmq-windows:3.9.29-ltsc2019 micdenny/rabbitmq-windows:3.9.29-servercore-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.9.29-ltsc2019
+          docker push micdenny/rabbitmq-windows:3.9.29-servercore-ltsc2019
           
       # Build and Push 3.9.22
       - name: Build the Docker image 3.9.22
