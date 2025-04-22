@@ -2,13 +2,13 @@
 ARG SERVER_VERSION='ltsc2022'  
 FROM mcr.microsoft.com/windows/servercore:${SERVER_VERSION}
 
-LABEL Description="RabbitMQ" Vendor="Pivotal" Version="3.12.2"
+LABEL Description="RabbitMQ" Vendor="Pivotal" Version="4.1.0"
 
 # ERLANG_HOME: erlang will install to this location and rabbitmq will use this environment variable to locate it
 # RABBITMQ_VERSION: rabbitmq version used in download url and to rename folder extracted from zip file
 # RABBITMQ_CONFIG_FILE: tell rabbitmq where to find our custom config file
 ENV ERLANG_HOME="c:\\erlang" \
-    RABBITMQ_VERSION="3.12.2" \
+    RABBITMQ_VERSION="4.1.0" \
     RABBITMQ_CONFIG_FILE="c:\\rabbitmq.conf"
 
 # setup powershell options for RUN commands
@@ -21,8 +21,8 @@ EXPOSE 5672 15672
 # remove version from rabbitmq folder name
 RUN Invoke-WebRequest -Uri "https://github.com/erlang/otp/releases/download/OTP-26.0.2/otp_win64_26.0.2.exe" -OutFile "c:\\erlang_install.exe" ; \
         Start-Process -Wait -FilePath "c:\\erlang_install.exe" -ArgumentList /S, /D=$env:ERLANG_HOME ; \
-        Remove-Item -Force -Path "C:\\erlang_install.exe" ; \
-    Invoke-WebRequest -Uri "https://github.com/rabbitmq/rabbitmq-server/releases/download/v$env:RABBITMQ_VERSION/rabbitmq-server-windows-$env:RABBITMQ_VERSION.zip" -OutFile "c:\\rabbitmq.zip" ; \
+        Remove-Item -Force -Path "C:\\erlang_install.exe" ;
+RUN Invoke-WebRequest -Uri "https://github.com/rabbitmq/rabbitmq-server/releases/download/v$env:RABBITMQ_VERSION/rabbitmq-server-windows-$env:RABBITMQ_VERSION.zip" -OutFile "c:\\rabbitmq.zip" ; \
         Expand-Archive -Path "c:\\rabbitmq.zip" -DestinationPath "c:\\" ; \
         Remove-Item -Force -Path "c:\\rabbitmq.zip" ; \
     Rename-Item -Path "c:\\rabbitmq_server-$env:rabbitmq_version" -NewName "c:\\rabbitmq"
