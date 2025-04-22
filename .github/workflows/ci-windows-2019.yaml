@@ -29,15 +29,25 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Build and Push 3.12.2 (latest)
+      # Build and Push 4.1.0 (latest)
+      - name: Build the Docker image 4.1.0
+        run: |
+          docker build . --file ./rabbitmq/windows/4.1.0/Dockerfile --tag micdenny/rabbitmq-windows:ltsc2019-latest --build-arg SERVER_VERSION=ltsc2019
+      - name: Publish to DockerHub 4.1.0
+        run: |
+          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:4.1.0-ltsc2019
+          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:4.1.0-servercore-ltsc2019
+          docker push micdenny/rabbitmq-windows:ltsc2019-latest
+          docker push micdenny/rabbitmq-windows:4.1.0-ltsc2019
+          docker push micdenny/rabbitmq-windows:4.1.0-servercore-ltsc2019
+
+      # Build and Push 3.12.2
       - name: Build the Docker image 3.12.2
         run: |
           docker build . --file ./rabbitmq/windows/3.12.2/Dockerfile --tag micdenny/rabbitmq-windows:ltsc2019-latest --build-arg SERVER_VERSION=ltsc2019
       - name: Publish to DockerHub 3.12.2
         run: |
-          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.12.2-ltsc2019
-          docker tag micdenny/rabbitmq-windows:ltsc2019-latest micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
-          docker push micdenny/rabbitmq-windows:ltsc2019-latest
+          docker tag micdenny/rabbitmq-windows:3.12.2-ltsc2019 micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
           docker push micdenny/rabbitmq-windows:3.12.2-ltsc2019
           docker push micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
 
