@@ -14,6 +14,7 @@
 - [`3.11.2`,`3.11.2-servercore-ltsc2019`,`3.11.2-servercore-ltsc2022`](https://github.com/micdenny/rabbitmq-windows/blob/master/rabbitmq/windows/3.11.2/Dockerfile)
 - [`3.11.20`,`3.11.20-servercore-ltsc2019`,`3.11.20-servercore-ltsc2022`](https://github.com/micdenny/rabbitmq-windows/blob/master/rabbitmq/windows/3.11.20/Dockerfile)
 - [`3.12.2`,`3.12.2-servercore-ltsc2019`,`3.12.2-servercore-ltsc2022`](https://github.com/micdenny/rabbitmq-windows/blob/master/rabbitmq/windows/3.12.2/Dockerfile)
+- [`4.1.0`,`4.1.0-servercore-ltsc2019`,`4.1.0-servercore-ltsc2022`](https://github.com/micdenny/rabbitmq-windows/blob/master/rabbitmq/windows/4.1.0/Dockerfile)
 - [`latest`,`ltsc2019-latest`,`ltsc2022-latest`](https://github.com/micdenny/rabbitmq-windows/blob/master/rabbitmq/windows/latest/Dockerfile)
 
 # What is RabbitMQ?
