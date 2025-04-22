@@ -44,7 +44,7 @@ jobs:
       # Build and Push 3.12.2
       - name: Build the Docker image 3.12.2
         run: |
-          docker build . --file ./rabbitmq/windows/3.12.2/Dockerfile --tag micdenny/rabbitmq-windows:ltsc2019-latest --build-arg SERVER_VERSION=ltsc2019
+          docker build . --file ./rabbitmq/windows/3.12.2/Dockerfile --tag micdenny/rabbitmq-windows:3.12.2-ltsc2019 --build-arg SERVER_VERSION=ltsc2019
       - name: Publish to DockerHub 3.12.2
         run: |
           docker tag micdenny/rabbitmq-windows:3.12.2-ltsc2019 micdenny/rabbitmq-windows:3.12.2-servercore-ltsc2019
