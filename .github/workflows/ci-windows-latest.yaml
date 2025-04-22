@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Build and Push 4.1.0
+      # Build and Push 4.1.0 (latest)
       - name: Build the Docker image 4.1.0
         run: |
           docker build . --file ./rabbitmq/windows/4.1.0/Dockerfile --tag micdenny/rabbitmq-windows:4.1.0 --build-arg SERVER_VERSION=ltsc2022
@@ -43,7 +43,7 @@ jobs:
           docker push micdenny/rabbitmq-windows:4.1.0
           docker push micdenny/rabbitmq-windows:4.1.0-servercore-ltsc2022 
 
-      # Build and Push 3.12.2 (latest)
+      # Build and Push 3.12.2
       - name: Build the Docker image 3.12.2
         run: |
           docker build . --file ./rabbitmq/windows/3.12.2/Dockerfile --tag micdenny/rabbitmq-windows:latest --build-arg SERVER_VERSION=ltsc2022
